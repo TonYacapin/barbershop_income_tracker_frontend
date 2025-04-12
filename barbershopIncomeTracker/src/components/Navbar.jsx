@@ -1,11 +1,11 @@
-"use client"
-
 import { useState, useEffect } from "react"
-import { FaChartBar, FaPlus, FaCog, FaHome, FaBars, FaTimes } from "react-icons/fa"
+import { FaChartBar, FaPlus, FaCog, FaHome, FaBars, FaTimes, FaSignOutAlt } from "react-icons/fa"
+import { useNavigate } from "react-router-dom"
 
 const Navbar = ({ setSelectedSection, selectedSection }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const navigate = useNavigate()
 
   // Add scroll detection for navbar appearance change
   useEffect(() => {
@@ -24,6 +24,22 @@ const Navbar = ({ setSelectedSection, selectedSection }) => {
     { id: "settings", label: "Settings", icon: <FaCog /> },
   ]
 
+  // Logout function
+  const handleLogout = () => {
+    // Clear localStorage
+    localStorage.clear()
+    
+    // Clear all cookies
+    document.cookie.split(";").forEach((cookie) => {
+      const eqPos = cookie.indexOf("=")
+      const name = eqPos > -1 ? cookie.substr(0, eqPos).trim() : cookie.trim()
+      document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/`
+    })
+    
+    // Redirect to login page
+    navigate("/")
+  }
+
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -35,7 +51,7 @@ const Navbar = ({ setSelectedSection, selectedSection }) => {
           {/* Logo */}
           <div className="flex items-center">
             <div className="text-[#D72638] font-bold text-xl tracking-tight">
-              Finance<span className="text-white">Tracker</span>
+              NGEL'S<span className="text-white"> CUT</span>
             </div>
           </div>
 
@@ -63,6 +79,19 @@ const Navbar = ({ setSelectedSection, selectedSection }) => {
                 <span>{item.label}</span>
               </button>
             ))}
+            
+            {/* Logout Button for Desktop */}
+            <button
+              onClick={handleLogout}
+              className="flex items-center px-4 py-2 rounded-full text-sm font-medium
+                text-gray-300 hover:bg-[#D72638]/20 hover:text-white
+                transition-all duration-200 ease-in-out ml-2"
+            >
+              <span className="mr-2">
+                <FaSignOutAlt />
+              </span>
+              <span>Logout</span>
+            </button>
           </div>
 
           {/* Mobile menu button */}
@@ -87,7 +116,7 @@ const Navbar = ({ setSelectedSection, selectedSection }) => {
       <div
         className={`
           md:hidden transition-all duration-300 ease-in-out overflow-hidden
-          ${isMobileMenuOpen ? "max-h-64 opacity-100" : "max-h-0 opacity-0"}
+          ${isMobileMenuOpen ? "max-h-80 opacity-100" : "max-h-0 opacity-0"}
         `}
       >
         <div className="px-4 pt-2 pb-4 space-y-2 bg-[#191919]/95 backdrop-blur-sm border-t border-[#D72638]/10">
@@ -112,6 +141,19 @@ const Navbar = ({ setSelectedSection, selectedSection }) => {
               <span className="font-medium">{item.label}</span>
             </button>
           ))}
+          
+          {/* Logout Button for Mobile */}
+          <button
+            onClick={handleLogout}
+            className="flex items-center w-full px-4 py-3 rounded-lg text-left
+              text-gray-300 hover:bg-[#D72638]/20 hover:text-white
+              transition-all duration-200 ease-in-out"
+          >
+            <span className="mr-3 text-lg">
+              <FaSignOutAlt />
+            </span>
+            <span className="font-medium">Logout</span>
+          </button>
         </div>
       </div>
     </nav>
