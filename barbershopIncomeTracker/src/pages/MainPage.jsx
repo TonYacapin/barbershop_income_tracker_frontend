@@ -1,40 +1,33 @@
-import React, { useState } from 'react';
-import Navbar from '../components/Navbar';
-import Dashboard from './Dashboard';
-import SettingsPage from './SettingsPage';
-import IncomePage from './IncomePage';
-import IncomeCharts from './IncomeCharts';
 
+import { useState } from "react"
+import Navbar from "../components/Navbar"
+import Dashboard from "./Dashboard"
+import SettingsPage from "./SettingsPage"
+import IncomePage from "./IncomePage"
+import IncomeCharts from "./IncomeCharts"
 
 const MainPage = () => {
-    const [selectedSection, setSelectedSection] = useState('dashboard');
+  const [selectedSection, setSelectedSection] = useState("dashboard")
 
-    const renderContent = () => {
-        switch (selectedSection) {
-            case 'settings':
-                return <SettingsPage />;
-            case 'charts':
-                return <IncomeCharts />;
-            case 'add-income':
-                return <IncomePage />;
-            default:
-                return <Dashboard />;
-        }
-    };
+  const renderContent = () => {
+    switch (selectedSection) {
+      case "settings":
+        return <SettingsPage />
+      case "charts":
+        return <IncomeCharts />
+      case "add-income":
+        return <IncomePage />
+      default:
+        return <Dashboard />
+    }
+  }
 
-    return (
-        <div>
-            <Navbar setSelectedSection={setSelectedSection} />
-            <div style={styles.dashboardContainer}>{renderContent()}</div>
-        </div>
-    );
-};
+  return (
+    <div className="min-h-screen bg-[#FFFFFF]">
+      <Navbar setSelectedSection={setSelectedSection} selectedSection={selectedSection} />
+      <div className="mx-auto mt-6 px-4 py-6 max-w-7xl">{renderContent()}</div>
+    </div>
+  )
+}
 
-const styles = {
-    dashboardContainer: {
-        marginTop: '20px',
-        padding: '20px',
-    },
-};
-
-export default MainPage;
+export default MainPage
