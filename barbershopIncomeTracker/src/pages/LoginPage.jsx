@@ -15,7 +15,7 @@ const LoginPage = () => {
     const token = Cookies.get('token');
     if (token) {
       // Redirect to the dashboard if the token exists
-      navigate('/dashboard');
+      navigate('/Home');
     }
   }, [navigate]);
 
