@@ -235,18 +235,20 @@ function IncomeCharts() {
           {totalIncome && (
             <div className="stats-card p-4 bg-white rounded-lg shadow text-black">
               <h2 className="text-lg font-semibold mb-3">Income Summary</h2>
-              <div className="grid grid-cols-3 gap-4 text-center">
-                <div className="stat">
-                  <div className="text-3xl font-bold text-red-600">₱{totalIncome.totalIncome.toFixed(2)}</div>
-                  <div className="text-sm text-gray-500">Total Income</div>
+              <div className="grid grid-cols-1 gap-4 mb-6">
+                <div className="p-4 bg-white rounded-lg shadow border-l-4 border-[#D72638]">
+                  <h3 className="text-gray-500 text-sm">Total Income</h3>
+                  <p className="text-2xl font-bold text-[#D72638]">₱{totalIncome.totalIncome.toFixed(2)}</p>
                 </div>
-                <div className="stat">
-                  <div className="text-3xl font-bold text-green-600">{totalIncome.totalHeads}</div>
-                  <div className="text-sm text-gray-500">Total Heads</div>
+                <div className="p-4 bg-white rounded-lg shadow border-l-4 border-[#191919]">
+                  <h3 className="text-gray-500 text-sm">Total Customers</h3>
+                  <p className="text-2xl font-bold text-[#191919]">{totalIncome.totalHeads}</p>
                 </div>
-                <div className="stat">
-                  <div className="text-3xl font-bold text-purple-600">₱{totalIncome.averageIncomePerHead?.toFixed(2) || 0}</div>
-                  <div className="text-sm text-gray-500">Avg Income/Head</div>
+                <div className="p-4 bg-white rounded-lg shadow border-l-4 border-[#D72638]">
+                  <h3 className="text-gray-500 text-sm">Average Per Customer</h3>
+                  <p className="text-2xl font-bold text-[#D72638]">
+                    ₱{totalIncome.averageIncomePerHead?.toFixed(2) || '0.00'}
+                  </p>
                 </div>
               </div>
             </div>
